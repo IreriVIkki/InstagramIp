@@ -1,24 +1,19 @@
 from django import forms
+from django.contrib.auth.models import User
+from django.core.exceptions import ValidationError
 
 
-class UserRegistration(forms.Form):
-    username = forms.CharField(max_length=30)
-    email = forms.EmailField(max_length=50)
-    password = forms.PasswordInput(max_length=50)
-    bio = forms.CharField(
-        max_length=2000,
-        widget=forms.Textarea(),
-        help_text='Write here your message!'
-    )
-    source = forms.CharField(       # A hidden input for internal use
-        max_length=50,              # tell from which page the user sent the message
-        widget=forms.HiddenInput()
-    )
+class UserRegistrationForm(forms.ModelForm):
+    password = forms.CharField(widget=forms.PasswordInput)
+    confirm_password = forms.CharField(widget=forms.PasswordInput)
 
-    def clean(self):
-        cleaned_data = super(UserRegistration, self).clean()
-        name = cleaned_data.get('name')
-        email = cleaned_data.get('email')
-        message = cleaned_data.get('message')
-        if not name and not email and not message:
-            raise forms.ValidationError('You have to write something!')
+    class Meta:
+        model = User
+        fields = ['username', 'email']
+
+    def clean_password(self):
+        cd = self.cleaned_data
+
+        if cd['confirm_password'] != cd['password']:
+            raise ValidationError("Passwords don't match")
+        return cd['confirm_password']

@@ -31,14 +31,14 @@ class Location(models.Model):
         return self.location
 
 
-class tags(models.Model):
+class tag(models.Model):
     tag = models.CharField(max_length=100)
 
     def save_tag(self):
         self.save()
 
 
-class Photos(models.Model):
+class Photo(models.Model):
     photo = models.ImageField(upload_to='images/')
     caption = models.TextField(blank=True)
     location = models.ManyToManyField(Location)

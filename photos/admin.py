@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import UserProfile, Location, tags, Photos
+from .models import UserProfile, Location, tag, Photo
 # Register your models here.
 
 
@@ -12,6 +12,6 @@ class PhotosAdmin(admin.ModelAdmin):
 
 
 admin.site.register(UserProfile, UserProfileAdmin)
-admin.site.register(tags)
+admin.site.register(tag)
 admin.site.register(Location)
-admin.site.register(Photos)
+admin.site.register(Photo)
