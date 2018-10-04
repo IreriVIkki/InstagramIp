@@ -2,27 +2,28 @@ from django.shortcuts import render, redirect
 from django.http import Http404, HttpResponse, HttpResponseRedirect, HttpResponseForbidden
 from .email import send_welcome_email
 from django.views.generic import CreateView
+from django.contrib.auth.forms import UserCreationForm
 from .forms import UserRegistrationForm
+from .models import User
 
 
 # Create your views here.
 
-class RegisterUserView(CreateView):
-    form = UserRegistrationForm
-    template_name = 'registration/registration_form.html'
+def signup(request):
 
-    def dispatch(self, request, *args, **kwargs):
-        if request.user.is_authenticated():
-            return HttpResponseForbidden()
+    if request.user.is_authenticated:
+        return redirect('djangobin:profile', username=request.user.username)
 
-        return super(RegisterUserView, self).dispatch(request, *args, **kwargs)
+    if request.method == 'POST':
+        f = UserCreationForm(request.POST)
+        if f.is_valid():
+            f.save()
+            return redirect('signup')
 
-    def form_valid(self, form, request):
-        user = form.save(commit=False)
-        user.set_password(form.cleaned_data['password'])
-        user.save()
+    else:
+        f = UserCreationForm()
 
-        return render(request, 'index.html')
+    return render(request, 'account/register.html', {'form': f})
 
 
 def home(request):
