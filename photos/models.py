@@ -4,4 +4,4 @@ from django.db import models
 
 
 class Location(models.Model):
-    locatoin = models.CharField()
+    locatoin = models.CharField(max_length=50)
