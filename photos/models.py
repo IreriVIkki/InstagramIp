@@ -44,13 +44,14 @@ class Photo(models.Model):
     photo = models.ImageField(upload_to='images/')
     caption = models.TextField(blank=True)
     location = models.ManyToManyField(Location, blank=True)
-    post_date = models.DateTimeField(auto_now_add=True, blank=True)
+    post_date = models.DateTimeField(auto_now_add=True)
 
 
 class Comment(models.Model):
-    author = models.ForeignKey(User)
-    photo = models.ForeignKey(Photo)
+    author = models.ForeignKey(User, related_name='comments')
+    photo = models.ForeignKey(Photo, related_name='comments')
     comment = models.TextField(blank=True)
+    posted_date = models.DateTimeField(auto_now_add=True)
 
 
 class PhotoLikes(models.Model):
@@ -61,3 +62,8 @@ class PhotoLikes(models.Model):
 class CommentLikes(models.Model):
     photo = models.ForeignKey(Comment, related_name='likes')
     likes = models.ForeignKey(User, related_name='liked_comments')
+
+
+class UserFavourites(models.Model):
+    user = models.ForeignKey(User, related_name='saved')
+    photo = models.ForeignKey(Photo, related_name='favourites')
