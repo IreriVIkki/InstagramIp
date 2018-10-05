@@ -51,3 +51,8 @@ class Comment(models.Model):
     author = models.ForeignKey(User)
     photo = models.ForeignKey(Photo)
     comment = models.TextField(blank=True)
+
+
+class PhotoLikes(models.Model):
+    photo = models.ForeignKey(Photo, related_name='likes')
+    liked_by = models.ForeignKey(User, related_name='liked_photos')
