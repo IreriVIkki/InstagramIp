@@ -56,3 +56,8 @@ class Comment(models.Model):
 class PhotoLikes(models.Model):
     photo = models.ForeignKey(Photo, related_name='likes')
     liked_by = models.ForeignKey(User, related_name='liked_photos')
+
+
+class CommentLikes(models.Model):
+    photo = models.ForeignKey(Comment, related_name='likes')
+    likes = models.ForeignKey(User, related_name='liked_comments')
