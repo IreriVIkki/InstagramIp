@@ -3,16 +3,32 @@ from django.http import Http404, HttpResponse, HttpResponseRedirect, HttpRespons
 from .email import send_welcome_email
 from django.views.generic import CreateView
 from django.contrib.auth.forms import UserCreationForm
-from .forms import UserRegistrationForm
-from .models import User
+from .models import User, Photo
+from .forms import NewPhotoForm
 
 
 # Create your views here.
 
+def new_post(request):
+    user = request.user
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            f = NewPhotoForm(request.POST, request.FILES)
+            if f.is_valid():
+                # photo = f.save(commit=False)
+                # photo.user = user
+                f.save()
+                return redirect('signup')
+        else:
+            f = NewPhotoForm()
+        return render(request, 'new_upload.html', {'post_form': f})
+    return redirect('home')
+
+
 def signup(request):
 
     if request.user.is_authenticated:
-        return redirect('djangobin:profile', username=request.user.username)
+        return redirect('home', username=request.user.username)
 
     if request.method == 'POST':
         f = UserCreationForm(request.POST)

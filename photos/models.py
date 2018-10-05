@@ -43,9 +43,4 @@ class Photo(models.Model):
     photo = models.ImageField(upload_to='images/')
     caption = models.TextField(blank=True)
     location = models.ManyToManyField(Location, blank=True)
-    likes = models.IntegerField(blank=True)
-
-
-class Comment(models.Model):
-    photo = models.IntegerField(Photo)
-    pass
+    post_date = models.DateTimeField(auto_now_add=True, blank=True)
