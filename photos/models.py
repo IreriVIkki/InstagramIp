@@ -46,6 +46,13 @@ class Photo(models.Model):
     location = models.ManyToManyField(Location, blank=True)
     post_date = models.DateTimeField(auto_now_add=True)
 
+    def all_photos(self):
+        all_photos = self.objects.all()
+        return all_photos
+
+    def __str__(self):
+        return self.caption
+
 
 class Comment(models.Model):
     author = models.ForeignKey(User, related_name='comments')
