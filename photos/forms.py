@@ -7,4 +7,4 @@ from .models import Photo
 class NewPhotoForm(forms.ModelForm):
     class Meta:
         model = Photo
-        exclude = ['likes']
+        exclude = ['uploaded_by']

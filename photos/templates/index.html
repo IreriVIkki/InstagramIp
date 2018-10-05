@@ -1,7 +1,21 @@
 {% extends 'base/layout.html' %}
 {% load static %}
 {% block content %}
-<h1>asdf
 
-</h1>
+{% for photo in photos %}
+<p>
+    <h3>{{ photo.uploaded_by }}</h3>
+    <div width="100">
+        <img src="{{ photo.photo.url }}" alt="test post" width="40%">
+    </div>
+    {{ photo.caption }}
+    <span>likes
+        {{ photo.likes.all | length }}
+    </span>
+    <span>comments
+        {{ photo.comments.all | length }}
+    </span>
+</p>
+{% endfor %}
+
 {% endblock content %}

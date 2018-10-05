@@ -40,14 +40,15 @@ class tag(models.Model):
 
 
 class Photo(models.Model):
-    uploaded_by = models.ForeignKey(User)
+    uploaded_by = models.ForeignKey(User, null=True)
     photo = models.ImageField(upload_to='images/')
     caption = models.TextField(blank=True)
     location = models.ManyToManyField(Location, blank=True)
     post_date = models.DateTimeField(auto_now_add=True)
 
-    def all_photos(self):
-        all_photos = self.objects.all()
+    @classmethod
+    def all_photos(cls):
+        all_photos = cls.objects.all()
         return all_photos
 
     def __str__(self):

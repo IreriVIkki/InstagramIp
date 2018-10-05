@@ -15,9 +15,12 @@ def new_post(request):
         if request.method == 'POST':
             f = NewPhotoForm(request.POST, request.FILES)
             if f.is_valid():
-                # photo = f.save(commit=False)
-                # photo.user = user
                 f.save()
+                cap = f.cleaned_data['caption']
+                photo = Photo.objects.get(caption=cap)
+                print(photo)
+                photo.upladed_by = user
+                photo.save()
                 return redirect('home')
         else:
             f = NewPhotoForm()
@@ -43,4 +46,8 @@ def signup(request):
 
 
 def home(request):
-    return render(request, 'index.html')
+    photos = Photo.all_photos()
+    context = {
+        'photos': photos
+    }
+    return render(request, 'index.html', context)
