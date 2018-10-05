@@ -40,7 +40,14 @@ class tag(models.Model):
 
 
 class Photo(models.Model):
+    uploaded_by = models.ForeignKey(User)
     photo = models.ImageField(upload_to='images/')
     caption = models.TextField(blank=True)
     location = models.ManyToManyField(Location, blank=True)
     post_date = models.DateTimeField(auto_now_add=True, blank=True)
+
+
+class Comment(models.Model):
+    author = models.ForeignKey(User)
+    photo = models.ForeignKey(Photo)
+    comment = models.TextField(blank=True)
