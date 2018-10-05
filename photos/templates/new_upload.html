@@ -1,10 +1,11 @@
 {% extends 'base/layout.html' %}
 {% load static %}
 {% block content %}
-<form action="{% url 'home' %}" method="POST" enctype="multipart/form-data">
+<form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit">Upload</button>
 </form>
-</form>
+
+<p><a href="{% url 'home' %}">Return to home</a></p>
 {% endblock content %}

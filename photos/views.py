@@ -18,10 +18,10 @@ def new_post(request):
                 # photo = f.save(commit=False)
                 # photo.user = user
                 f.save()
-                return redirect('signup')
+                return redirect('home')
         else:
             f = NewPhotoForm()
-        return render(request, 'new_upload.html', {'post_form': f})
+        return render(request, 'new_upload.html', {'form': f})
     return redirect('home')
 
 
