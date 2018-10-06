@@ -51,6 +51,12 @@ class Photo(models.Model):
         all_photos = cls.objects.all()
         return all_photos
 
+    @classmethod
+    def user_photos(cls, user_name):
+        user = User.objects.filter(username=user_name)[0]
+        photos = cls.objects.filter(uploaded_by=user)
+        return photos
+
     def __str__(self):
         return self.caption
 
