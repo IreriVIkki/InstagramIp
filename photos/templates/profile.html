@@ -2,48 +2,33 @@
 {% load static %}
 {% block content %}
 
-
-
 <div class="bg-light pt-5">
-    <div class="box-70 d-table">
-        <div class="box-65 pr-3 d-table-cell">
+    <div class="box-70">
+        <div class="user-info">
+
+        </div>
+        <div class="profile-nav border-top border-secondary">
+
+        </div>
+
+        <div class="d-flex justify-content-center">
             {% for photo in photos %}
-            <div class="card d-table d-flex mb-5 py-3">
-                <div class="row">
-                    <div class="col-md-3 w-100">
-                        <img class="w-75" src="{{ photo.uploaded_by.profile_photo.url }}" alt="">
-                    </div>
-                    <a>{{photo.uploaded_by}}</a>
-                </div>
-                <div class="home-photo-box d-flex align-items-center">
+            <div class="box-30 up-photo">
+                <div class="home-photo-box d-flex align-items-center justify-content-center">
                     <img class="home-photo" src="{{ photo.photo.url }}" alt="test post">
+                </div>
+                <div class="up-overlay">
+                    <span>likes
+                        {{ photo.likes.all | length }}
+                    </span>
+                    <span>comments
+                        {{ photo.comments.all | length }}
+                    </span>
                 </div>
             </div>
             {% endfor %}
         </div>
-        <div class="box-35 d-table-cell">
-            <div class="container">
-                <a>header</a>
-            </div>
-        </div>
     </div>
 </div>
-
-
-{% for photo in photos %}
-<p>
-    <h3>{{ photo.uploaded_by }}</h3>
-    <div width="100">
-        <img src="{{ photo.photo.url }}" alt="test post" width="40%">
-    </div>
-    {{ photo.caption }}
-    <span>likes
-        {{ photo.likes.all | length }}
-    </span>
-    <span>comments
-        {{ photo.comments.all | length }}
-    </span>
-</p>
-{% endfor %}
 
 {% endblock content %}

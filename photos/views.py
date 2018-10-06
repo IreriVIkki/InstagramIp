@@ -46,10 +46,13 @@ def signup(request):
 
 
 def home(request):
-    photos = Photo.all_photos()
-    context = {
-        'photos': photos
-    }
+    if request.user.is_authenticated:
+        user = request.user
+        photos = Photo.all_photos()
+        context = {
+            'user': user,
+            'photos': photos
+        }
     return render(request, 'index.html', context)
 
 
@@ -77,9 +80,13 @@ def edit_profile(request):
     return render(request, 'profile_edit.html', context)
 
 
-def profile(request):
-    photos = Photo.all_photos()
-    context = {
-        'photos': photos
-    }
+def profile(request, username):
+    if request.user.is_authenticated:
+        user = request.user
+        photos = Photo.user_photos(username)
+        print(photos)
+        context = {
+            'user': user,
+            'photos': photos
+        }
     return render(request, 'profile.html', context)

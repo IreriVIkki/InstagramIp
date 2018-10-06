@@ -42,7 +42,7 @@
                             <img class=" nav-ig-icons mx-2" src="{% static 'img/ig-explore.png' %}">
                         </a>
                         <a> <img class="nav-ig-cdn-icons" src="https://png.icons8.com/ios/100/000000/hearts.png"></a>
-                        <a class="button is-primary">
+                        <a href="{% url 'profile' user.username %}" class="button is-primary">
                             <img class=" nav-ig-icons mx-2" src="{% static 'img/ig-user.png' %}" width="25">
                         </a>
                     </div>
