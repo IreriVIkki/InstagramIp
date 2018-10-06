@@ -2,6 +2,29 @@
 {% load static %}
 {% block content %}
 
+<div class="bg-light pt-5">
+    <div class="box-70 d-table">
+        <div class="box-65 pr-3 d-table-cell">
+            {% for photo in photos %}
+            <div class="card d-table d-flex">
+                <div class="d-table-row">
+                    <a>{{photo.uploaded_by}}</a>
+                </div>
+                <div class="card-img">
+                    <img src="{{ photo.photo.url }}" alt="test post" width="40%">
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="box-35 d-table-cell">
+            <div class="container">
+                <a>header</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 {% for photo in photos %}
 <p>
     <h3>{{ photo.uploaded_by }}</h3>

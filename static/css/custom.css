@@ -1,5 +1,10 @@
 .nav-ig-icons {
-    width: 40px;
+    width: 24px;
+    height: auto;
+}
+
+.nav-ig-cdn-icons {
+    width: 28px;
     height: auto;
 }
 
@@ -7,7 +12,26 @@
     height: 30px;
 }
 
+.navbar {
+    height: 77px;
+}
+
 .far {
     font-size: 26px;
     font-weight: lighter;
+}
+
+.box-70 {
+    width: 70%;
+    margin: auto;
+}
+
+.box-35 {
+    width: 35%;
+    margin: auto;
+}
+
+.box-65 {
+    width: 65%;
+    margin: auto;
 }
