@@ -3,7 +3,7 @@ from django.http import Http404, HttpResponse, HttpResponseRedirect, HttpRespons
 from .email import send_welcome_email
 from django.views.generic import CreateView
 from django.contrib.auth.forms import UserCreationForm
-from .models import User, Photo
+from .models import User, Photo, UserProfile
 from .forms import NewPhotoForm, ProfileForm
 
 
@@ -54,18 +54,24 @@ def home(request):
 
 
 def edit_profile(request):
-    user = request.user
-    if request.method == 'POST':
-        form = ProfileForm(request.POST, request.FILES)
-        print(form.is_valid())
-        if form.is_valid():
-            print('success')
-            pass  # does nothing, just trigger the validation
-    else:
-        form = ProfileForm()
+    if request.user.is_authenticated:
+        user = request.user
+        if request.method == 'POST':
+            form = ProfileForm(request.POST, request.FILES)
+            print(form.is_valid())
+            if form.is_valid():
+                form.save()
+                name = form.cleaned_data['name']
+                profile = UserProfile.objects.get(name=name)
+                print(profile)
+                profile.user = user
+                profile.save()
+                return redirect('home')
+        else:
+            form = ProfileForm()
 
-    context = {
-        'form': form,
-        'user': user,
-    }
+        context = {
+            'form': form,
+            'user': user,
+        }
     return render(request, 'profile_edit.html', context)

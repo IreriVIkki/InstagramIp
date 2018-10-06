@@ -20,12 +20,11 @@ class UserProfile(models.Model):
     gender = models.CharField(
         max_length=20, choices=STATUS_CHOICES, blank=True)
     age = models.PositiveIntegerField(blank=True, null=True)
-    phone = models.PositiveIntegerField(blank=True)
+    phone = models.PositiveIntegerField(null=True)
     email = models.CharField(max_length=50, null=True)
-    phone_number = models.PositiveIntegerField(null=True)
 
     def __str__(self):
-        return self.user
+        return self.user_name
 
     class Meta:
         verbose_name = 'Profile'
