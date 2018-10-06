@@ -4,7 +4,7 @@ from .email import send_welcome_email
 from django.views.generic import CreateView
 from django.contrib.auth.forms import UserCreationForm
 from .models import User, Photo
-from .forms import NewPhotoForm
+from .forms import NewPhotoForm, ProfileForm
 
 
 # Create your views here.
@@ -51,3 +51,20 @@ def home(request):
         'photos': photos
     }
     return render(request, 'index.html', context)
+
+
+def edit_profile(request):
+    user = request.user
+    if request.method == 'POST':
+        form = ProfileForm(request.POST, request.FILES)
+        if form.is_valid():
+            print('success')
+            pass  # does nothing, just trigger the validation
+    else:
+        form = ProfileForm()
+
+    context = {
+        'form': form,
+        'user': user,
+    }
+    return render(request, 'profile_edit.html', context)

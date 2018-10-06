@@ -1,0 +1,148 @@
+{% extends 'base/layout.html' %}
+{% load static %}
+{% load widget_tweaks %}
+{% block content %}
+<form method="post" novalidate>
+    {% csrf_token %}
+
+    <div class="bg-light pt-5">
+        <div class="box-70 d-table">
+            <div class="box-35 d-table-cell">
+
+            </div>
+            <div class="box-65 d-table-cell">
+                <div class="container">
+                    <div class="row p-0 m-0 mb-3">
+                        <div class="col-md-3 text-center">
+                            {% if user.profile.profile_photo %}
+                            <img class="img-rounded profile-ig-icons" src="{{ user.profile.profile_photo }}" alt="">
+                            {% else %}
+
+                            <img class="img-rounded profile-ig-icons" src="{% static 'img/male-icon.png' %}" alt="">
+                            {% endif %}
+                        </div>
+                        <div class="col-md-9">
+                            <div class="d-flex">
+                                <h3 class="font-bold mr-bold">{{ user.username }}</h3>
+                            </div>
+                            <div class="">
+                                <label class="form-control-sm form-inline" for="">{{ form.change_profile_photo.label }}</label>
+                                {% render_field form.change_profile_photo class='form-control-file' %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row p-0 m-0 mb-3">
+                        <div class="col-md-3">
+                            <h6 class="font-weight-bold mb-0">{{ form.name.label_tag }}</h6>
+                        </div>
+                        <div class="col-md-9">
+                            {% render_field form.name class='form-control input-height ' %}
+                        </div>
+                    </div>
+                    <div class="row p-0 m-0 mb-3">
+                        <div class="col-md-3">
+                            <h6 class="font-weight-bold mb-0">{{ form.user_name.label_tag }}</h6>
+                        </div>
+                        <div class="col-md-9">
+                            {% render_field form.user_name class='form-control input-height ' %}
+                        </div>
+                    </div>
+                    <div class="row p-0 m-0 mb-3">
+                        <div class="col-md-3">
+                            <h6 class="font-weight-bold mb-0">{{ form.website.label_tag }}</h6>
+                        </div>
+                        <div class="col-md-9">
+                            {% render_field form.website class='form-control input-height ' %}
+                        </div>
+                    </div>
+                    <div class="row p-0 m-0 mb-3">
+                        <div class="col-md-3">
+                            <h6 class="font-weight-bold mb-0">{{ form.bio.label_tag }}</h6>
+                        </div>
+                        <div class="col-md-9">
+                            {% render_field form.bio class='form-control' rows=3%}
+                        </div>
+                    </div>
+                    <div class="row p-0 m-0">
+                        <div class="col-md-3" name='Empty column'></div>
+                        <div class="col-md-9">
+                            <h3 class="text-muted">Private Information</h3>
+                        </div>
+                    </div>
+                    <div class="row p-0 m-0 mb-3">
+                        <div class="col-md-3">
+                            <h6 class="font-weight-bold mb-0">{{ form.email.label_tag }}</h6>
+                        </div>
+                        <div class="col-md-9">
+                            {% render_field form.email class='form-control input-height ' %}
+                        </div>
+                    </div>
+                    <div class="row p-0 m-0 mb-3">
+                        <div class="col-md-3">
+                            <h6 class="font-weight-bold mb-0">{{ form.phone_number.label_tag }}</h6>
+                        </div>
+                        <div class="col-md-9">
+                            {% render_field form.phone_number class='form-control input-height ' %}
+                        </div>
+                    </div>
+                    <div class="row p-0 m-0 mb-3">
+                        <div class="col-md-3">
+                            <h6 class="font-weight-bold mb-0">{{ form.age.label_tag }}</h6>
+                        </div>
+                        <div class="col-md-9">
+                            {% render_field form.age initial=0 %}
+                        </div>
+                    </div>
+                    <div class="row p-0 m-0 mb-3">
+                        <div class="col-md-3">
+                            <h6 class="font-weight-bold mb-0">{{ form.gender.label_tag }}</h6>
+                        </div>
+                        <div class="col-md-9">
+                            {% render_field form.gender class='input-height form-control' %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- 
+    {% if form.non_field_errors %}
+    <div class="alert alert-danger" role="alert">
+        {% for error in form.non_field_errors %}
+        {{ error }}
+        {% endfor %}
+    </div>
+    {% endif %} -->
+
+    <button>{{ form.name }}</button>
+
+    {% for field in form.visible_fields %}
+    <div class="form-group">
+        {{ field.label_tag }}
+
+        {% if form.is_bound %}
+        {% if field.errors %}
+        {% render_field field class="form-control is-invalid" %}
+        {% for error in field.errors %}
+        <div class="invalid-feedback">
+            {{ error }}
+        </div>
+        {% endfor %}
+        {% else %}
+        {% render_field field class="form-control is-valid" %}
+        {% endif %}
+        {% else %}
+        {% render_field field class="form-control" %}
+        {% endif %}
+
+        {% if field.help_text %}
+        <small class="form-text text-muted">{{ field.help_text }}</small>
+        {% endif %}
+    </div>
+    {% endfor %}
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+{% endblock content %}
