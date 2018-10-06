@@ -6,12 +6,12 @@
     <div class="box-70 d-table">
         <div class="box-65 pr-3 d-table-cell">
             {% for photo in photos %}
-            <div class="card d-table d-flex">
+            <div class="card d-table d-flex mb-5 py-3">
                 <div class="d-table-row">
                     <a>{{photo.uploaded_by}}</a>
                 </div>
-                <div class="card-img">
-                    <img src="{{ photo.photo.url }}" alt="test post" width="40%">
+                <div class="home-photo-box d-flex align-items-center">
+                    <img class="home-photo" src="{{ photo.photo.url }}" alt="test post">
                 </div>
             </div>
             {% endfor %}

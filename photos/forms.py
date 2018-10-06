@@ -8,3 +8,7 @@ class NewPhotoForm(forms.ModelForm):
     class Meta:
         model = Photo
         exclude = ['uploaded_by']
+
+
+class ProfileForm(forms.Form):
+    pass

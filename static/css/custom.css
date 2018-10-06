@@ -35,3 +35,13 @@
     width: 65%;
     margin: auto;
 }
+
+.home-photo-box {
+    min-height: 400px;
+    max-height: 600px;
+    overflow: hidden;
+}
+
+.home-photo {
+    width: 100%;
+}
