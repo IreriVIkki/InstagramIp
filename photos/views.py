@@ -75,3 +75,11 @@ def edit_profile(request):
             'user': user,
         }
     return render(request, 'profile_edit.html', context)
+
+
+def profile(request):
+    photos = Photo.all_photos()
+    context = {
+        'photos': photos
+    }
+    return render(request, 'profile.html', context)
