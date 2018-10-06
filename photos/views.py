@@ -57,6 +57,7 @@ def edit_profile(request):
     user = request.user
     if request.method == 'POST':
         form = ProfileForm(request.POST, request.FILES)
+        print(form.is_valid())
         if form.is_valid():
             print('success')
             pass  # does nothing, just trigger the validation
