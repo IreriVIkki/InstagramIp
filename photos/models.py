@@ -118,3 +118,9 @@ class CommentLikes(models.Model):
 class UserFavourites(models.Model):
     user = models.ForeignKey(User, related_name='saved')
     photo = models.ForeignKey(Photo, related_name='favourites')
+
+
+class Follow(models.Model):
+    user_from = models.ForeignKey(User, related_name='followers')
+    user_to = models.ForeignKey(User, related_name='following')
+    created = models.DateTimeField(auto_now_add=True, db_index=True)
