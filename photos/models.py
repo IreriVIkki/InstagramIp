@@ -67,6 +67,10 @@ class Photo(models.Model):
         photos = cls.objects.filter(uploaded_by=user)
         return photos
 
+    def save_photo(self, user):
+        self.uploaded_by = user
+        self.save()
+
     def __str__(self):
         return self.caption
 
@@ -74,7 +78,7 @@ class Photo(models.Model):
 class Comment(models.Model):
     author = models.ForeignKey(User, related_name='comments', null=True)
     photo = models.ForeignKey(Photo, related_name='comments', null=True)
-    comment = models.TextField(blank=True)
+    comment = models.TextField()
     posted_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -86,10 +90,20 @@ class Comment(models.Model):
         comments = Comment.objects.filter(photo=ph)
         return comments
 
+    def save_comment(self, user, photo):
+        self.author = user
+        self.photo = photo
+        self.save()
+
 
 class PhotoLikes(models.Model):
-    photo = models.ForeignKey(Photo, related_name='likes')
-    liked_by = models.ForeignKey(User, related_name='liked_photos')
+    photo = models.ForeignKey(Photo, related_name='likes', null=True)
+    liked_by = models.ForeignKey(User, related_name='liked_photos', null=True)
+
+    def save_like(self, photo, user):
+        self.photo = photo
+        self.liked_by = user
+        self.save()
 
 
 class CommentLikes(models.Model):

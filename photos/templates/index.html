@@ -3,17 +3,15 @@
 {% block content %}
 {% load widget_tweaks %}
 
-
-
-
 <div class="bg-light pt-5">
     <div class="box-70 d-table">
         <div class="box-65 pr-3 d-table-cell">
             {% for photo in photos %}
             <div class="card card-columns d-table d-flex mb-5">
-                <div class="d-table-row d-inline-flex my-2">
-                    <div class="profile-photo mx-3">
-                        <img class="d-pic" src="{{ photo.uploaded_by.profile.change_profile_photo.url }}" alt="dpic">
+                <div class="d-table-row d-inline-flex my-2 d-pic-box">
+                    <div class="home-profile-photo mx-3">
+                        <img class="d-pic d-flex mx-auto" src="{{ photo.uploaded_by.profile.change_profile_photo.url }}"
+                            alt="dpic">
                     </div>
                     <div class="">
                         <a class="d-block font-weight-bold">{{photo.uploaded_by.profile.user_name}}</a>
@@ -27,14 +25,28 @@
                 </div>
                 <div class="ml-2">
 
-                    <div class="d-flex">
-                        <a class="mx-2" href="">l</a>
-                        <a class="mx-2" href="">c</a>
-                        <a class="mx-2" href="">s</a>
-                        <a class="mx-2 ml-auto" href="">f</a>
+                    <div class="d-flex my-3">
+                        <div>
+                            <form method="post" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                {% render_field l_form.photo_id class='d-none' value=photo.id %}
+                                <button class="like-button" type="submit">
+                                    <img class="nav-ig-icons" src="{% static 'img/like.png' %}" alt="">
+                                </button>
+                            </form>
+                        </div>
+                        <a class="mx-2" href="">
+                            <img class="nav-ig-icons" src="{% static 'img/message.png' %}" alt="">
+                        </a>
+                        <a class="mx-2" href="">
+                            <img class="nav-ig-icons" src="{% static 'img/share.png' %}" alt="">
+                        </a>
+                        <a class="mx-2 ml-auto" href="">
+                            <img class="nav-ig-icons" src="{% static 'img/favourite.png' %}" alt="">
+                        </a>
                     </div>
                     <div class="likes-section">
-                        <p class="mb-1">
+                        <p class="mb-1 font-weight-bold">
                             <span>{{ photo.likes.all | length }}</span>
                             <span> likes</span>
                         </p>
@@ -82,7 +94,15 @@
         </div>
         <div class="box-35 d-table-cell">
             <div class="container">
-                <a>header</a>
+                <div class="border-bottom border-secondary">
+
+                </div>
+                <div>
+
+                </div>
+                <div>
+
+                </div>
             </div>
         </div>
     </div>

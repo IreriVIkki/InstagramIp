@@ -1,9 +1,19 @@
 {% extends 'base/layout.html' %}
 {% load static %}
 {% block content %}
+{% load widget_tweaks %}
 <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
-    {{ form.as_p }}
+    {% for item in form %}
+    {% if item is form.uploaded_by %}
+    {% render_field form.uploaded_by class='d-non' value=user %}
+    {% else %}
+    <div class="form-control">
+        {{ item.label_tag }}
+        {{ item }}
+    </div>
+    {% endif %}
+    {% endfor %}
     <button type="submit">Upload</button>
 </form>
 

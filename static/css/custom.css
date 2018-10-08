@@ -52,21 +52,36 @@
 }
 
 .profile-photo-box {
-    position: relative;
     width: 100%;
     overflow: hidden;
 }
+
 
 .profile-photo-box img {
     height: 100%;
     width: auto;
 }
 
-.profile-d-pic {
-    width: 200px;
-    height: auto;
+.profile-photo {
+    width: 170px;
+    height: 150px;
     border-radius: 50%;
+    overflow: hidden;
+
 }
+
+.user-photo {
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+
+}
+
+.profile-d-pic {
+    width: auto;
+    height: 100%;
+}
+
 
 .settings-icon {
     height: 34px;
@@ -100,10 +115,21 @@
     width: 100%;
 }
 
-.d-pic {
+.d-pic-box {
+    min-height: 48px;
+}
+
+.home-profile-photo {
     width: 45px;
-    height: auto;
+    height: 45px;
     border-radius: 50%;
+    overflow: hidden;
+
+}
+
+.d-pic {
+    width: auto;
+    height: 100%;
 }
 
 .comm {
@@ -117,4 +143,14 @@
 
 .comm:active {
     border: none !important;
+}
+
+.like-button {
+    border: none;
+    background: none;
+}
+
+.like-button:hover {
+    border: none;
+    background: none;
 }

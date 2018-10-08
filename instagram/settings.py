@@ -57,7 +57,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'widget_tweaks',
-    # 'registration',
+    'registration',
     'bootstrap3',
     'photos.apps.PhotosConfig',
     'django.contrib.admin',

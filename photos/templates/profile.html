@@ -52,11 +52,11 @@
                 <div class="profile-overlay d-flex align-items-center text-white font-weight-bold">
                     <div class="d-flex mx-auto">
                         <div class="d-flex">
-                            <img src="" alt="">
+                            <img src="{% static 'img/comments.png' %}" alt="">
                             <h5 class="ml-1 mr-4">{{ photo.likes.all | length }}</h5>
                         </div>
                         <div class="d-flex">
-                            <img src="" alt="">
+                            <img src="{% static 'img/likes.png' %}" alt="">
                             <h5 class="ml-1 ">{{ photo.comments.all | length }}</h5>
                         </div>
                     </div>
