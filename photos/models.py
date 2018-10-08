@@ -120,7 +120,11 @@ class UserFavourites(models.Model):
     photo = models.ForeignKey(Photo, related_name='favourites')
 
 
-class Follow(models.Model):
-    user_from = models.ForeignKey(User, related_name='followers')
-    user_to = models.ForeignKey(User, related_name='following')
-    created = models.DateTimeField(auto_now_add=True, db_index=True)
+class Followers(models.Model):
+    follower = models.ForeignKey(User, related_name='followers')
+    folloed_on = models.DateTimeField(auto_now_add=True)
+
+
+class Following(models.Model):
+    following = models.ForeignKey(User, related_name='following')
+    folloed_on = models.DateTimeField(auto_now_add=True)
