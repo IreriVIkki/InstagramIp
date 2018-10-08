@@ -6,11 +6,11 @@
     <div class="box-70">
         <div class="user-info py-5 mx-5 d-flex">
             <div class="profile-photo box-30 mr-5">
-                <img class="profile-d-pic" src="{{ user.profile.change_profile_photo.url }}" alt="">
+                <img class="profile-d-pic" src="{{ o_user.profile.change_profile_photo.url }}" alt="">
             </div>
             <div class="profile-info box-70 w-75">
                 <div class="d-inline-flex mb-2">
-                    <p class="font-weight-bold h2">{{ user.profile.user_name }}</p>
+                    <p class="font-weight-bold h2">{{ o_user.profile.user_name }}</p>
                     <a class="btn btn-outline-dark mx-4 h-100 py-1" href="">Edit Profile</a>
                     <a href="">
                         <span> <img class="settings-icon" src="{% static 'img/settings.png' %}" alt=""></span>
@@ -18,23 +18,23 @@
                 </div>
                 <div class="d-flex justify-content-between mb-2">
                     <div class="d-inline-flex">
-                        <span class="mr-2">{{ user.photos.all | length }}</span>
+                        <span class="mr-2">{{ o_user.photos.all | length }}</span>
                         <span> Posts</span>
                     </div>
                     <div class="d-inline-flex mb-2">
-                        <span class="mr-2">{{ user.followers.all | length }}</span>
+                        <span class="mr-2">{{ o_user.followers.all | length }}</span>
                         <span> Followers</span>
                     </div>
                     <div class="d-inline-flex mb-2">
-                        <span class="mr-2">{{ user.following.all | length }}</span>
+                        <span class="mr-2">{{ o_user.following.all | length }}</span>
                         <span> Following</span>
                     </div>
                 </div>
                 <div>
-                    <h5 class="font-weight-bold">{{ user.profile.name }}</h5>
+                    <h5 class="font-weight-bold">{{ o_user.profile.name }}</h5>
                 </div>
                 <div>
-                    <p>{{ user.profile.bio }}</p>
+                    <p>{{ o_user.profile.bio }}</p>
                 </div>
             </div>
         </div>

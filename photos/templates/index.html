@@ -14,7 +14,7 @@
                             alt="dpic">
                     </div>
                     <div class="">
-                        <a class="d-block font-weight-bold">{{photo.uploaded_by.profile.user_name}}</a>
+                        <a href="query/profile/{{ photo.uploaded_by.id }}" class="d-block font-weight-bold">{{photo.uploaded_by.profile.user_name}}</a>
                         {% if photo.location.name %}
                         <a class="d-block" href="">{{ photo.location.name }}</a>
                         {% endif %}

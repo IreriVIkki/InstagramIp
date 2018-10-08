@@ -118,13 +118,25 @@ def edit_profile(request):
     return render(request, 'profile_edit.html', context)
 
 
-def profile(request, username):
+def profile(request):
     if request.user.is_authenticated:
         user = request.user
-        photos = Photo.user_photos(username)
+        photos = Photo.user_photos(user.username)
         print(photos)
         context = {
             'user': user,
             'photos': photos
         }
     return render(request, 'profile.html', context)
+
+
+def other_profile(request, user_id):
+    if request.user.is_authenticated():
+        return redirect('profile')
+    o_user = User.objects.get(pk=user_id)
+    photos = Photo.objects.filter(uploaded_by=o_user)
+    context = {
+        'o_user': o_user,
+        'photos': photos
+    }
+    return render(request, 'other_profile.html', context)
