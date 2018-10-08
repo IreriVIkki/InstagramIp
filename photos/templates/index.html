@@ -9,11 +9,31 @@
         <div class="box-65 pr-3 d-table-cell">
             {% for photo in photos %}
             <div class="card d-table d-flex mb-5 py-3">
-                <div class="d-table-row">
-                    <a>{{photo.uploaded_by}}</a>
+                <div class="d-table-row d-inline-flex">
+                    <div class="profile-photo mx-3">
+                        <img class="d-pic" src="{{ photo.uploaded_by.profile.change_profile_photo.url }}" alt="dpic">
+                    </div>
+                    <div class="">
+                        <a class="d-block">{{photo.uploaded_by.profile.user_name}}</a>
+                        {% if photo.location.name %}
+                        <a class="d-block" href="">{{ photo.location.name }}</a>
+                        {% endif %}
+                    </div>
                 </div>
                 <div class="home-photo-box d-flex align-items-center">
                     <img class="home-photo" src="{{ photo.photo.url }}" alt="test post">
+                </div>
+                <div>
+                    <a href="">l</a>
+                    <a href="">c</a>
+                    <a href="">s</a>
+                    <a href="">f</a>
+                </div>
+                <div class="likes-section">
+                    <p>
+                        <span>{{ photo.likes.all | length }}</span>
+                        <span> likes</span>
+                    </p>
                 </div>
             </div>
             {% endfor %}
@@ -25,22 +45,5 @@
         </div>
     </div>
 </div>
-
-
-{% for photo in photos %}
-<p>
-    <h3>{{ photo.uploaded_by }}</h3>
-    <div width="100">
-        <img src="{{ photo.photo.url }}" alt="test post" width="40%">
-    </div>
-    {{ photo.caption }}
-    <span>likes
-        {{ photo.likes.all | length }}
-    </span>
-    <span>comments
-        {{ photo.comments.all | length }}
-    </span>
-</p>
-{% endfor %}
 
 {% endblock content %}

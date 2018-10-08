@@ -42,11 +42,17 @@
 }
 
 .home-photo-box {
-    min-height: 400px;
+    /* min-height: 400px; */
     max-height: 600px;
     overflow: hidden;
 }
 
 .home-photo {
     width: 100%;
+}
+
+.d-pic {
+    width: 45px;
+    height: auto;
+    border-radius: 50%;
 }
