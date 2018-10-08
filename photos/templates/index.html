@@ -8,13 +8,13 @@
     <div class="box-70 d-table">
         <div class="box-65 pr-3 d-table-cell">
             {% for photo in photos %}
-            <div class="card d-table d-flex mb-5 py-3">
-                <div class="d-table-row d-inline-flex">
+            <div class="card d-table d-flex mb-5">
+                <div class="d-table-row d-inline-flex my-2">
                     <div class="profile-photo mx-3">
                         <img class="d-pic" src="{{ photo.uploaded_by.profile.change_profile_photo.url }}" alt="dpic">
                     </div>
                     <div class="">
-                        <a class="d-block">{{photo.uploaded_by.profile.user_name}}</a>
+                        <a class="d-block font-weight-bold">{{photo.uploaded_by.profile.user_name}}</a>
                         {% if photo.location.name %}
                         <a class="d-block" href="">{{ photo.location.name }}</a>
                         {% endif %}
@@ -30,11 +30,18 @@
                     <a href="">f</a>
                 </div>
                 <div class="likes-section">
-                    <p>
+                    <p class="mb-1">
                         <span>{{ photo.likes.all | length }}</span>
                         <span> likes</span>
                     </p>
                 </div>
+                <div class="photo-caption">
+                    <p>
+                        <span class="font-weight-bold">{{ photo.uploaded_by.profile.user_name }}</span>
+                        <span> {{ photo.caption }}</span>
+                    </p>
+                </div>
+                <form action="{{  }}"></form>
             </div>
             {% endfor %}
         </div>
