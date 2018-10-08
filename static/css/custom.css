@@ -52,6 +52,7 @@
 }
 
 .profile-photo-box {
+    position: relative;
     width: 100%;
     overflow: hidden;
 }
@@ -69,6 +70,24 @@
 
 .settings-icon {
     height: 34px;
+}
+
+.profile-nav {
+    height: 53px;
+}
+
+.profile-overlay {
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(1, 1, 1, 0.7);
+    display: none;
+}
+
+.profile-overlay:hover {
+    display: inherit;
 }
 
 .home-photo-box {

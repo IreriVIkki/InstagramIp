@@ -8,17 +8,34 @@
             <div class="profile-photo box-30 mr-5">
                 <img class="profile-d-pic" src="{{ user.profile.change_profile_photo.url }}" alt="">
             </div>
-            <div class="profile-info box-70 ml-5">
-                <div class="d-inline-flex">
+            <div class="profile-info box-70 w-75">
+                <div class="d-inline-flex mb-2">
                     <p class="font-weight-bold h2">{{ user.profile.user_name }}</p>
-                    <a class="btn btn-outline-dark mx-4 h-100" href="">Edit Profile</a>
+                    <a class="btn btn-outline-dark mx-4 h-100 py-1" href="">Edit Profile</a>
                     <a href="">
                         <span> <img class="settings-icon" src="{% static 'img/settings.png' %}" alt=""></span>
                     </a>
                 </div>
-                <div></div>
-                <div></div>
-                <div></div>
+                <div class="d-flex justify-content-between mb-2">
+                    <div class="d-inline-flex">
+                        <span class="mr-2">{{ user.photos.all | length }}</span>
+                        <span> Posts</span>
+                    </div>
+                    <div class="d-inline-flex mb-2">
+                        <span class="mr-2">{{ user.followers.all | length }}</span>
+                        <span> Followers</span>
+                    </div>
+                    <div class="d-inline-flex mb-2">
+                        <span class="mr-2">{{ user.following.all | length }}</span>
+                        <span> Following</span>
+                    </div>
+                </div>
+                <div>
+                    <h5 class="font-weight-bold">{{ user.profile.name }}</h5>
+                </div>
+                <div>
+                    <p>{{ user.profile.bio }}</p>
+                </div>
             </div>
         </div>
         <div class="profile-nav d-flex justify-content-center border-top border-secondary">
@@ -32,18 +49,25 @@
                 <div class="profile-photo-box">
                     <img class="profile-photo" src="{{ photo.photo.url }}" alt="test post">
                 </div>
-                <div class="up-overlay">
-                    <span>likes
-                        {{ photo.likes.all | length }}
-                    </span>
-                    <span>comments
-                        {{ photo.comments.all | length }}
-                    </span>
+                <div class="profile-overlay d-flex align-items-center text-white font-weight-bold">
+                    <div class="d-flex mx-auto">
+                        <div class="d-flex">
+                            <img src="" alt="">
+                            <h5 class="ml-1 mr-4">{{ photo.likes.all | length }}</h5>
+                        </div>
+                        <div class="d-flex">
+                            <img src="" alt="">
+                            <h5 class="ml-1 ">{{ photo.comments.all | length }}</h5>
+                        </div>
+                    </div>
                 </div>
             </div>
             {% endfor %}
         </div>
     </div>
+</div>
+<div style="margin-top: 200px;">
+
 </div>
 
 {% endblock content %}
