@@ -36,16 +36,6 @@
     margin: auto;
 }
 
-.box-30 {
-    width: 30%;
-    margin: auto;
-}
-
-.box-33 {
-    width: calc(100% / 3);
-    margin: auto;
-}
-
 .box-65 {
     width: 65%;
     margin: auto;
@@ -58,26 +48,5 @@
 }
 
 .home-photo {
-    width: auto;
-    min-height: 200px;
-    max-height: 300px;
-}
-
-.user-info {
-    height: 150px;
-}
-
-.profile-nav {
-    height: 30px;
-}
-
-.row-photos {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-areas: 'a b c';
-    grid-column-gap: 5px;
-}
-
-.up-photo {
-    grid-area: a;
+    width: 100%;
 }

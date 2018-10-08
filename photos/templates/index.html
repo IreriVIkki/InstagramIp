@@ -9,10 +9,7 @@
         <div class="box-65 pr-3 d-table-cell">
             {% for photo in photos %}
             <div class="card d-table d-flex mb-5 py-3">
-                <div class="row">
-                    <div class="col-md-3 w-100">
-                        <img class="w-75" src="{{ photo.uploaded_by.profile_photo.url }}" alt="">
-                    </div>
+                <div class="d-table-row">
                     <a>{{photo.uploaded_by}}</a>
                 </div>
                 <div class="home-photo-box d-flex align-items-center">
