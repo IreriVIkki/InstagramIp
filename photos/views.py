@@ -131,8 +131,6 @@ def profile(request):
 
 
 def other_profile(request, user_id):
-    if request.user.is_authenticated():
-        return redirect('profile')
     o_user = User.objects.get(pk=user_id)
     photos = Photo.objects.filter(uploaded_by=o_user)
     context = {

@@ -14,7 +14,11 @@
                             alt="dpic">
                     </div>
                     <div class="">
-                        <a href="query/profile/{{ photo.uploaded_by.id }}" class="d-block font-weight-bold">{{photo.uploaded_by.profile.user_name}}</a>
+                        {% ifnotequal request.user photo.uploaded_by %}
+                        <a href="{% url 'other_profile' photo.uploaded_by.id %}" class="d-block font-weight-bold">{{photo.uploaded_by.profile.user_name}}</a>
+                        {% else %}
+                        <a href="{% url 'profile' %}" class="d-block font-weight-bold">{{photo.uploaded_by.profile.user_name}}</a>
+                        {% endifnotequal %}
                         {% if photo.location.name %}
                         <a class="d-block" href="">{{ photo.location.name }}</a>
                         {% endif %}
