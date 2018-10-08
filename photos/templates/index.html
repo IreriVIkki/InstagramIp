@@ -23,11 +23,11 @@
                 <div class="home-photo-box d-flex align-items-center">
                     <img class="home-photo" src="{{ photo.photo.url }}" alt="test post">
                 </div>
-                <div>
-                    <a href="">l</a>
-                    <a href="">c</a>
-                    <a href="">s</a>
-                    <a href="">f</a>
+                <div class="d-flex">
+                    <a class="mx-2" href="">l</a>
+                    <a class="mx-2" href="">c</a>
+                    <a class="mx-2" href="">s</a>
+                    <a class="mx-2 ml-auto" href="">f</a>
                 </div>
                 <div class="likes-section">
                     <p class="mb-1">
@@ -41,7 +41,13 @@
                         <span> {{ photo.caption }}</span>
                     </p>
                 </div>
-                <form action="{{  }}"></form>
+                <div class="add-comment">
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <button type="submit">Upload</button>
+                    </form>
+                </div>
             </div>
             {% endfor %}
         </div>
