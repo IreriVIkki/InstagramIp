@@ -3,8 +3,8 @@ from django.http import Http404, HttpResponse, HttpResponseRedirect, HttpRespons
 from .email import send_welcome_email
 from django.views.generic import CreateView
 from django.contrib.auth.forms import UserCreationForm
-from .models import User, Photo, UserProfile
-from .forms import NewPhotoForm, ProfileForm
+from .models import User, Photo, UserProfile, Comment
+from .forms import NewPhotoForm, ProfileForm, CommentForm
 
 
 # Create your views here.
@@ -47,11 +47,24 @@ def signup(request):
 
 def home(request):
     if request.user.is_authenticated:
+        if request.method == 'POST':
+            comment_form = CommentForm(request.POST)
+            print(comment_form.is_valid())
+            if comment_form.is_valid():
+                comment_form.save()
+                photo_id = comment_form.cleaned_data['photo_id']
+                comment = Comment.objects.last()
+                print(comment)
+                photo = Photo.objects.get(pk=photo_id)
+                comment.author = request.user
+                comment.photo = photo
+                comment.save()
         user = request.user
         photos = Photo.all_photos()
         context = {
             'user': user,
-            'photos': photos
+            'photos': photos,
+            'c_form': comment_form
         }
     return render(request, 'index.html', context)
 

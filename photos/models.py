@@ -72,10 +72,13 @@ class Photo(models.Model):
 
 
 class Comment(models.Model):
-    author = models.ForeignKey(User, related_name='comments')
-    photo = models.ForeignKey(Photo, related_name='comments')
+    author = models.ForeignKey(User, related_name='comments', null=True)
+    photo = models.ForeignKey(Photo, related_name='comments', null=True)
     comment = models.TextField(blank=True)
     posted_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.comment
 
 
 class PhotoLikes(models.Model):

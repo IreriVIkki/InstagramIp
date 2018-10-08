@@ -1,6 +1,8 @@
 {% extends 'base/layout.html' %}
 {% load static %}
 {% block content %}
+{% load widget_tweaks %}
+
 
 
 
@@ -41,10 +43,11 @@
                         <span> {{ photo.caption }}</span>
                     </p>
                 </div>
-                <div class="add-comment">
+                <div class="add-comment mx-2 mb-2">
                     <form method="post" enctype="multipart/form-data">
                         {% csrf_token %}
-                        {{ form.as_p }}
+                        {% render_field c_form.photo_id class='form-control d-none' value=photo.id %}
+                        {% render_field c_form.comment class='form-control input-height' %}
                         <button type="submit">Upload</button>
                     </form>
                 </div>

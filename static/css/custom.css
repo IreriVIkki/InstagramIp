@@ -56,3 +56,7 @@
     height: auto;
     border-radius: 50%;
 }
+
+.add-comment {
+    height: 30px;
+}

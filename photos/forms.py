@@ -19,6 +19,8 @@ class ProfileForm(forms.ModelForm):
 
 
 class CommentForm (forms.ModelForm):
+    photo_id = forms.IntegerField()
+
     class Meta:
         model = Comment
         exclude = ['author', 'photo']
