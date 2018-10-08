@@ -82,7 +82,7 @@ class Photo(models.Model):
 class Comment(models.Model):
     author = models.ForeignKey(User, related_name='comments', null=True)
     photo = models.ForeignKey(Photo, related_name='comments', null=True)
-    comment = models.TextField()
+    comment = models.CharField(max_length=1000)
     posted_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
