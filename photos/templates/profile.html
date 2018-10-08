@@ -2,14 +2,23 @@
 {% load static %}
 {% block content %}
 
-<div class="bg-light pt-5">
+<div class="bg-light">
     <div class="box-70">
-        <div class="user-info">
-            <div class="profile-photo box-30">
-                <img class="img-rounded" src="{{ user.profile.profile_photo.url }}" alt="">
+        <div class="user-info py-5 mx-5 d-flex">
+            <div class="profile-photo box-30 mr-5">
+                <img class="profile-d-pic" src="{{ user.profile.change_profile_photo.url }}" alt="">
             </div>
-            <div class="profile-info box-70">
-
+            <div class="profile-info box-70 ml-5">
+                <div class="d-inline-flex">
+                    <p class="font-weight-bold h2">{{ user.profile.user_name }}</p>
+                    <a class="btn btn-outline-dark mx-4 h-100" href="">Edit Profile</a>
+                    <a href="">
+                        <span> <img class="settings-icon" src="{% static 'img/settings.png' %}" alt=""></span>
+                    </a>
+                </div>
+                <div></div>
+                <div></div>
+                <div></div>
             </div>
         </div>
         <div class="profile-nav d-flex justify-content-center border-top border-secondary">
@@ -19,8 +28,8 @@
 
         <div class="d-flex justify-content-between">
             {% for photo in photos %}
-            <div class="box-30">
-                <div class="profile-photo-box h-100 d-flex align-items-center justify-content-center">
+            <div class="card box-33-m">
+                <div class="profile-photo-box">
                     <img class="profile-photo" src="{{ photo.photo.url }}" alt="test post">
                 </div>
                 <div class="up-overlay">

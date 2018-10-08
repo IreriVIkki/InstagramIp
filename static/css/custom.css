@@ -31,6 +31,11 @@
     margin: auto;
 }
 
+.box-30 {
+    width: 30;
+    margin: auto;
+}
+
 .box-35 {
     width: 35%;
     margin: auto;
@@ -39,6 +44,31 @@
 .box-65 {
     width: 65%;
     margin: auto;
+}
+
+.box-33-m {
+    width: 32%;
+    height: 300px;
+}
+
+.profile-photo-box {
+    width: 100%;
+    overflow: hidden;
+}
+
+.profile-photo-box img {
+    height: 100%;
+    width: auto;
+}
+
+.profile-d-pic {
+    width: 200px;
+    height: auto;
+    border-radius: 50%;
+}
+
+.settings-icon {
+    height: 34px;
 }
 
 .home-photo-box {
@@ -57,6 +87,15 @@
     border-radius: 50%;
 }
 
-.add-comment {
+.comm {
     height: 30px;
+    position: inherit;
+    -ms-flex-align: center !important;
+    align-items: center !important;
+    border: none;
+    overflow: hidden scroll;
+}
+
+.comm:active {
+    border: none !important;
 }

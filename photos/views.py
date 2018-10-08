@@ -51,14 +51,14 @@ def home(request):
             comment_form = CommentForm(request.POST)
             print(comment_form.is_valid())
             if comment_form.is_valid():
-                comment_form.save()
                 photo_id = comment_form.cleaned_data['photo_id']
-                comment = Comment.objects.last()
-                print(comment)
+                comment = Comment.objects.filter(comment=p_comment)
                 photo = Photo.objects.get(pk=photo_id)
                 comment.author = request.user
                 comment.photo = photo
-                comment.save()
+                comment_form.save()
+        else:
+            comment_form = CommentForm()
         user = request.user
         photos = Photo.all_photos()
         context = {

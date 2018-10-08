@@ -10,7 +10,7 @@
     <div class="box-70 d-table">
         <div class="box-65 pr-3 d-table-cell">
             {% for photo in photos %}
-            <div class="card d-table d-flex mb-5">
+            <div class="card card-columns d-table d-flex mb-5">
                 <div class="d-table-row d-inline-flex my-2">
                     <div class="profile-photo mx-3">
                         <img class="d-pic" src="{{ photo.uploaded_by.profile.change_profile_photo.url }}" alt="dpic">
@@ -25,31 +25,57 @@
                 <div class="home-photo-box d-flex align-items-center">
                     <img class="home-photo" src="{{ photo.photo.url }}" alt="test post">
                 </div>
-                <div class="d-flex">
-                    <a class="mx-2" href="">l</a>
-                    <a class="mx-2" href="">c</a>
-                    <a class="mx-2" href="">s</a>
-                    <a class="mx-2 ml-auto" href="">f</a>
-                </div>
-                <div class="likes-section">
-                    <p class="mb-1">
-                        <span>{{ photo.likes.all | length }}</span>
-                        <span> likes</span>
-                    </p>
-                </div>
-                <div class="photo-caption">
-                    <p>
-                        <span class="font-weight-bold">{{ photo.uploaded_by.profile.user_name }}</span>
-                        <span> {{ photo.caption }}</span>
-                    </p>
-                </div>
-                <div class="add-comment mx-2 mb-2">
-                    <form method="post" enctype="multipart/form-data">
-                        {% csrf_token %}
-                        {% render_field c_form.photo_id class='form-control d-none' value=photo.id %}
-                        {% render_field c_form.comment class='form-control input-height' %}
-                        <button type="submit">Upload</button>
-                    </form>
+                <div class="ml-2">
+
+                    <div class="d-flex">
+                        <a class="mx-2" href="">l</a>
+                        <a class="mx-2" href="">c</a>
+                        <a class="mx-2" href="">s</a>
+                        <a class="mx-2 ml-auto" href="">f</a>
+                    </div>
+                    <div class="likes-section">
+                        <p class="mb-1">
+                            <span>{{ photo.likes.all | length }}</span>
+                            <span> likes</span>
+                        </p>
+                    </div>
+                    <div class="photo-caption">
+                        <p>
+                            <span class="font-weight-bold">{{ photo.uploaded_by.profile.user_name }}</span>
+                            <span> {{ photo.caption }}</span>
+                        </p>
+                    </div>
+                    <div class="comments">
+                        {% for comment in photo.comments.all %}
+                        <p class="mb-1">
+                            <span class="font-weight-bold">{{ comment.author.profile.user_name }}</span>
+                            <span>{{ comment.comment }}</span>
+                        </p>
+                        {% endfor %}
+                    </div>
+                    <div class="comment-box mx-2 mb-2">
+                        <form method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            {% for field in c_form.visible_fields %}
+                            {% if field is c_form.photo_id %}
+                            <div class="form-group d-block">
+                                {% render_field field value=photo.id class='d-none' %}
+                                {% for error in field.errors %}
+                                <span class="help-block">{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            {% else %}
+                            <div class="form-group d-block">
+                                {% render_field field class='comm d-flex form-control' placeholder="Add a comment"%}
+                                {% for error in field.errors %}
+                                <span class="help-block">{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            {% endif %}
+                            {% endfor %}
+                            <button class="btn btn-sm" type="submit">comment</button>
+                        </form>
+                    </div>
                 </div>
             </div>
             {% endfor %}

@@ -50,7 +50,7 @@ class tag(models.Model):
 
 
 class Photo(models.Model):
-    uploaded_by = models.ForeignKey(User, null=True)
+    uploaded_by = models.ForeignKey(User, null=True, related_name='photos')
     photo = models.ImageField(upload_to='images/')
     caption = models.TextField(blank=True)
     location = models.ManyToManyField(Location, blank=True)
@@ -79,6 +79,12 @@ class Comment(models.Model):
 
     def __str__(self):
         return self.comment
+
+    @classmethod
+    def all_photo_comments(cls, photo_id):
+        ph = Photo.objects.get(pk=photo_id)
+        comments = Comment.objects.filter(photo=ph)
+        return comments
 
 
 class PhotoLikes(models.Model):
