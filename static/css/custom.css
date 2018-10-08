@@ -62,6 +62,21 @@
     width: auto;
 }
 
+.u-profile-photo-box {
+    width: 100%;
+    overflow: hidden;
+}
+
+.u-profile-photo-box img {
+    height: 100%;
+    width: auto;
+}
+
+
+.user-photos {
+    height: 100%;
+}
+
 .profile-photo {
     width: 170px;
     height: 150px;

@@ -43,11 +43,12 @@
             <a class="nav-link text-dark d-flex align-items-center px-5 border-top border-dak" href="">Saved</a>
         </div>
 
-        <div class="d-flex justify-content-between">
+        <div class="d-flex justify-content-between w-100 row m-0 p-0">
+
             {% for photo in photos %}
-            <div class="card box-33-m">
-                <div class="profile-photo-box">
-                    <img class="profile-photo" src="{{ photo.photo.url }}" alt="test post">
+            <div class="card box-33-m col-4">
+                <div class="u-profile-photo-box">
+                    <img class="user-photos" src="{{ photo.photo.url }}" alt="test post">
                 </div>
                 <div class="profile-overlay d-flex align-items-center text-white font-weight-bold">
                     <div class="d-flex mx-auto">

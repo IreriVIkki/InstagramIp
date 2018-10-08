@@ -67,6 +67,10 @@ class Photo(models.Model):
         photos = cls.objects.filter(uploaded_by=user)
         return photos
 
+    def get_user_profile(self, photo):
+        photos = Photo.objects.filter(uploaded_by=photo.uploaded_by)
+        return photos
+
     def save_photo(self, user):
         self.uploaded_by = user
         self.save()
