@@ -40,14 +40,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'wj63t*ic1po*)ocf3hr_mj7$y9ej7l*29v#_=)l$_12i-n5c8l'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = []
-
-
+DEBUG = False
 # Application definition
 
 INSTALLED_APPS = [
@@ -169,7 +164,7 @@ django_heroku.settings(locals())
 # *****************************************************
 
 MODE = config("MODE", default="dev")
-SECRET_KEY = 'p8g#hq5g^8h)v-ly-6$3wkysz%v#v)$9%9(!&&pxa193!pman0'
+SECRET_KEY = 'wj63t*ic1po*)ocf3hr_mj7$y9ej7l*29v#_=)l$_12i-n5c8l'
 DEBUG = config('DEBUG', default=True, cast=bool)
 # development
 
