@@ -121,10 +121,19 @@ class UserFavourites(models.Model):
 
 
 class Followers(models.Model):
-    follower = models.ForeignKey(User, related_name='followers')
-    folloed_on = models.DateTimeField(auto_now_add=True)
+    follower = models.ForeignKey(User, related_name='followers', null=True)
+    following = models.ForeignKey(User, related_name='following', null=True)
+    followed_on = models.DateTimeField(auto_now_add=True)
 
+    def follow_user(self, current_user, user_other):
+        self.following = user_other
+        self.follower = current_user
+        self.save()
 
-class Following(models.Model):
-    following = models.ForeignKey(User, related_name='following')
-    folloed_on = models.DateTimeField(auto_now_add=True)
+    def unfollow_user(self, current_user, user_other):
+        self.following.delete()
+        self.follower.delete()
+        self.save()
+
+    def __str__(self):
+        return f'{self.follower.username} is now following {self.following.username}'

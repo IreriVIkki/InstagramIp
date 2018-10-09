@@ -1,6 +1,8 @@
 {% extends 'base/layout.html' %}
 {% load static %}
 {% block content %}
+{% load widget_tweaks %}
+
 
 <div class="bg-light">
     <div class="box-70">
@@ -11,7 +13,12 @@
             <div class="profile-info box-70 w-75">
                 <div class="d-inline-flex mb-2">
                     <p class="font-weight-bold h2">{{ o_user.profile.user_name }}</p>
-                    <a class="btn btn-outline-dark mx-4 h-100 py-1" href="">Follow</a>
+                    <div class="follow-form mx-3">
+                        <form method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <button class="btn btn-outline-secondary py-1 px-5 text-dark" type="submit">Follow</button>
+                        </form>
+                    </div>
                     <a href="">
                         <span> <img class="settings-icon" src="{% static 'img/settings.png' %}" alt=""></span>
                     </a>
@@ -19,15 +26,15 @@
                 <div class="d-flex justify-content-between mb-2">
                     <div class="d-inline-flex">
                         <span class="mr-2">{{ o_user.photos.all | length }}</span>
-                        <span> Posts</span>
+                        <span> posts</span>
                     </div>
                     <div class="d-inline-flex mb-2">
                         <span class="mr-2">{{ o_user.followers.all | length }}</span>
-                        <span> Followers</span>
+                        <span> followers</span>
                     </div>
                     <div class="d-inline-flex mb-2">
                         <span class="mr-2">{{ o_user.following.all | length }}</span>
-                        <span> Following</span>
+                        <span> following</span>
                     </div>
                 </div>
                 <div>

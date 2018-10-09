@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
-from .models import Photo, UserProfile, Comment, PhotoLikes
+from .models import Photo, UserProfile, Comment, PhotoLikes, Followers
 
 
 class NewPhotoForm(forms.ModelForm):
@@ -33,4 +33,11 @@ class LikeForm(forms.ModelForm):
     class Meta:
         model = PhotoLikes
         exclude = ['photo', 'liked_by']
+        list_display = []
+
+
+class FollowForm(forms.ModelForm):
+    class Meta:
+        model = Followers
+        exclude = ['follower', 'following']
         list_display = []

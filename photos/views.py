@@ -3,8 +3,8 @@ from django.http import Http404, HttpResponse, HttpResponseRedirect, HttpRespons
 from .email import send_welcome_email
 from django.views.generic import CreateView
 from django.contrib.auth.forms import UserCreationForm
-from .models import User, Photo, UserProfile, Comment, PhotoLikes
-from .forms import NewPhotoForm, ProfileForm, CommentForm, LikeForm
+from .models import User, Photo, UserProfile, Comment, PhotoLikes, Followers
+from .forms import NewPhotoForm, ProfileForm, CommentForm, LikeForm, FollowForm
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
 from django.core.files.storage import FileSystemStorage
@@ -35,14 +35,14 @@ def signup(request):
     if request.method == 'POST':
         f = UserCreationForm(request.POST)
         if f.is_valid():
-            print('trinh')
             f.save()
-            return redirect('home')
+            print('trinh')
+            return redirect('login')
 
     else:
         f = UserCreationForm()
 
-    return render(request, 'account/register.html', {'form': f})
+    return render(request, 'registration/registration_form.html', {'form': f})
 
 
 def home(request):
@@ -131,8 +131,18 @@ def profile(request):
 
 
 def other_profile(request, user_id):
+    user = request.user
     o_user = User.objects.get(pk=user_id)
     photos = Photo.objects.filter(uploaded_by=o_user)
+    if request.method == 'POST':
+        f_form = FollowForm(request.POST)
+        print(f_form.is_valid())
+        if f_form.is_valid():
+            f_form.save()
+            follow = Followers.objects.last()
+            follow.follow_user(user, o_user)
+            print(follow)
+            return redirect('other_profile')
     context = {
         'o_user': o_user,
         'photos': photos
