@@ -71,6 +71,14 @@ class Photo(models.Model):
         photos = Photo.objects.filter(uploaded_by=photo.uploaded_by)
         return photos
 
+    def get_following_photos(self, user):
+        following = user.following.all()
+        f = []
+        for i in fol:
+            for p in i.follower.photos.all():
+                f.append(p)
+        return f
+
     def save_photo(self, user):
         self.uploaded_by = user
         self.save()
@@ -130,10 +138,9 @@ class Followers(models.Model):
         self.follower = current_user
         self.save()
 
-    def unfollow_user(self, current_user, user_other):
-        self.following.delete()
-        self.follower.delete()
-        self.save()
+    def unfollow_user(self, user):
+        fol = Followers.objects.get(follower=user)
+        fol.delete()
 
     def __str__(self):
         return f'{self.follower.username} is now following {self.following.username}'

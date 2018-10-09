@@ -138,11 +138,16 @@ def other_profile(request, user_id):
         f_form = FollowForm(request.POST)
         print(f_form.is_valid())
         if f_form.is_valid():
-            f_form.save()
-            follow = Followers.objects.last()
-            follow.follow_user(user, o_user)
-            print(follow)
-            return redirect('other_profile')
+            if len(user.followers.all()) > 0:
+                follow = Followers.objects.get(follower=user)
+                follow.unfollow_user(user)
+                print(follow)
+            else:
+                f_form.save()
+                follow = Followers.objects.last()
+                follow.follow_user(user, o_user)
+                print(follow)
+            return redirect('home')
     context = {
         'o_user': o_user,
         'photos': photos
