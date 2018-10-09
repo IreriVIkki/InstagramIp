@@ -67,17 +67,13 @@ class Photo(models.Model):
         photos = cls.objects.filter(uploaded_by=user)
         return photos
 
+    @classmethod
+    def filter_by_search_term(cls, search_term):
+        return cls.objects.filter(caption__icontains=search_term)
+
     def get_user_profile(self, photo):
         photos = Photo.objects.filter(uploaded_by=photo.uploaded_by)
         return photos
-
-    def get_following_photos(self, user):
-        following = user.following.all()
-        f = []
-        for i in fol:
-            for p in i.follower.photos.all():
-                f.append(p)
-        return f
 
     def save_photo(self, user):
         self.uploaded_by = user

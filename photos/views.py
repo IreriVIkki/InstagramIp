@@ -71,11 +71,16 @@ def home(request):
         else:
             comment_form = CommentForm()
             like_form = CommentForm()
-        user = request.user
-        photos = Photo.all_photos()
+        user = User.objects.get(pk=user.id)
+        fol = user.following.all()
+        f = [i for i in Photo.user_photos(user)]
+        for i in fol:
+            for p in i.photos.all():
+                f.append(p)
+        print(fol)
         context = {
             'user': user,
-            'photos': photos,
+            'photos': f,
             'c_form': comment_form,
             'l_form': like_form,
         }
@@ -153,3 +158,35 @@ def other_profile(request, user_id):
         'photos': photos
     }
     return render(request, 'other_profile.html', context)
+
+
+def search_results(request):
+    # check if the input field exists and that ic contains data
+    if 'photo' in request.GET and request.GET['photo']:
+        # get the data from the search input field
+        search_term = request.GET.get('photo')
+        searched_photos = Photo.filter_by_search_term(search_term)
+        caption = f'Search results for {search_term}'
+        if len(searched_photos) == 0:
+            searched_photos = Photo.all_photos()
+            caption = 'No Results Found'
+        search_context = {
+            'photos': searched_photos,
+            'caption': caption,
+        }
+        return render(request, 'search.html', search_context)
+    else:
+        photos = Photo.all_photos()
+        search_context = {
+            'photos': photos,
+            'caption': 'No Results Matched Your Search!! Discover More Photos'
+        }
+        return render(request, 'explore.html', search_context)
+
+
+def explore(request):
+    photos = Photo.all_photos()
+    search_context = {
+        'photos': photos,
+    }
+    return render(request, 'explore.html', search_context)

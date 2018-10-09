@@ -10,7 +10,9 @@ urlpatterns = [
     url('^new/post/$', views.new_post, name='new_post'),
     url('^edit/profile/$', views.edit_profile, name='edit_profile'),
     url('^query/profile/(\w+)$', views.other_profile, name='other_profile'),
-    url('^/user/profile/$', views.profile, name='profile'),
+    url('^user/profile/$', views.profile, name='profile'),
+    url('^search/photos/$', views.search_results, name='search'),
+    url('^discover/photos/and/people/$', views.explore, name='explore'),
 ]
 
 

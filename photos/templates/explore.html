@@ -1,0 +1,115 @@
+{% extends 'base/layout.html' %}
+{% load static %}
+{% block content %}
+{% load widget_tweaks %}
+
+<div class="bg-light pt-5">
+    <div class="box-70 d-table">
+        <div class="box-65 pr-3 d-table-cell">
+            {% for photo in photos %}
+            <div class="card card-columns d-table d-flex mb-5">
+                <div class="d-table-row d-inline-flex my-2 d-pic-box">
+                    <div class="home-profile-photo mx-3">
+                        <img class="d-pic d-flex mx-auto" src="{{ photo.uploaded_by.profile.change_profile_photo.url }}"
+                            alt="dpic">
+                    </div>
+                    <div class="">
+                        {% ifnotequal request.user photo.uploaded_by %}
+                        <a href="{% url 'other_profile' photo.uploaded_by.id %}" class="d-block font-weight-bold">{{photo.uploaded_by.profile.user_name}}</a>
+                        {% else %}
+                        <a href="{% url 'profile' %}" class="d-block font-weight-bold">{{photo.uploaded_by.profile.user_name}}</a>
+                        {% endifnotequal %}
+                        {% if photo.location.name %}
+                        <a class="d-block" href="">{{ photo.location.name }}</a>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="home-photo-box d-flex align-items-center">
+                    <img class="home-photo" src="{{ photo.photo.url }}" alt="test post">
+                </div>
+                <div class="ml-2">
+
+                    <div class="d-flex my-3">
+                        <div>
+                            <form method="post" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                {% render_field l_form.photo_id class='d-none' value=photo.id %}
+                                <button class="like-button" type="submit">
+                                    <img class="nav-ig-icons" src="{% static 'img/like.png' %}" alt="">
+                                </button>
+                            </form>
+                        </div>
+                        <a class="mx-2" href="">
+                            <img class="nav-ig-icons" src="{% static 'img/message.png' %}" alt="">
+                        </a>
+                        <a class="mx-2" href="">
+                            <img class="nav-ig-icons" src="{% static 'img/share.png' %}" alt="">
+                        </a>
+                        <a class="mx-2 ml-auto" href="">
+                            <img class="nav-ig-icons" src="{% static 'img/favourite.png' %}" alt="">
+                        </a>
+                    </div>
+                    <div class="likes-section">
+                        <p class="mb-1 font-weight-bold">
+                            <span>{{ photo.likes.all | length }}</span>
+                            <span> likes</span>
+                        </p>
+                    </div>
+                    <div class="photo-caption">
+                        <p>
+                            <span class="font-weight-bold">{{ photo.uploaded_by.profile.user_name }}</span>
+                            <span> {{ photo.caption }}</span>
+                        </p>
+                    </div>
+                    <div class="comments">
+                        {% for comment in photo.comments.all %}
+                        <p class="mb-1">
+                            <span class="font-weight-bold">{{ comment.author.profile.user_name }}</span>
+                            <span>{{ comment.comment }}</span>
+                        </p>
+                        {% endfor %}
+                    </div>
+                    <div class="comment-box mx-2 mb-2">
+                        <form method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            {% for field in c_form.visible_fields %}
+                            {% if field is c_form.photo_id %}
+                            <div class="form-group d-block">
+                                {% render_field field value=photo.id class='d-none' %}
+                                {% for error in field.errors %}
+                                <span class="help-block">{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            {% else %}
+                            <div class="form-group d-block my-2 pt-3 border-top">
+                                {% render_field field class='comm d-flex form-control' placeholder="Add a comment"%}
+                                {% for error in field.errors %}
+                                <span class="help-block">{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            {% endif %}
+                            {% endfor %}
+                            <button class="btn btn-sm d-none" type="submit">comment</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="box-35 d-table-cell">
+            <div class="container">
+                <div class="border-bottom border-secondary">
+
+                </div>
+                <div>
+
+                </div>
+                <div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
