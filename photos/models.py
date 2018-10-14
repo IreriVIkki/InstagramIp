@@ -23,6 +23,9 @@ class UserProfile(models.Model):
     phone = models.PositiveIntegerField(null=True)
     email = models.CharField(max_length=50, null=True)
 
+    def save_profile(self):
+        self.save()
+
     def __str__(self):
         return self.user_name
 
@@ -71,8 +74,9 @@ class Photo(models.Model):
     def filter_by_search_term(cls, search_term):
         return cls.objects.filter(caption__icontains=search_term)
 
-    def get_user_profile(self, photo):
-        photos = Photo.objects.filter(uploaded_by=photo.uploaded_by)
+    @classmethod
+    def get_user_profile(cls, photo):
+        photos = cls.objects.filter(uploaded_by=photo.uploaded_by)
         return photos
 
     def save_photo(self, user):

@@ -1,8 +1,9 @@
 {% extends 'base/layout.html' %}
 {% load static %}
 {% block content %}
+{% load widget_tweaks %}
 
-<div class="bg-light">
+<div class="bg-light" style="position:relative;">
     <div class="box-70">
         <div class="user-info py-5 mx-5 d-flex">
             <div class="profile-photo box-30 mr-5">
@@ -63,11 +64,13 @@
                     </div>
                 </div>
             </div>
+
             {% endfor %}
+
         </div>
     </div>
 </div>
-<div style="margin-top: 200px;">
+<div style="margin-top: 50px;">
 
 </div>
 

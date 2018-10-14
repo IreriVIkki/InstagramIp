@@ -15,7 +15,7 @@
                     </div>
                     <div class="">
                         {% ifnotequal request.user photo.uploaded_by %}
-                        <a href="{% url 'other_profile' photo.uploaded_by.id %}" class="d-block font-weight-bold">{{photo.uploaded_by.profile.user_name}}</a>
+                        <a href="{% url 'other_profile' photo.uploaded_by.id %}" class="d-block font-weight-bold nav-link text-dark">{{photo.uploaded_by.profile.user_name}}</a>
                         {% else %}
                         <a href="{% url 'profile' %}" class="d-block font-weight-bold">{{photo.uploaded_by.profile.user_name}}</a>
                         {% endifnotequal %}

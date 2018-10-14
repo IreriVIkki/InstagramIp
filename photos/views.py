@@ -72,12 +72,13 @@ def home(request):
             comment_form = CommentForm()
             like_form = CommentForm()
         user = User.objects.get(pk=user.id)
-        fol = user.following.all()
-        f = [i for i in Photo.user_photos(user)]
-        for i in fol:
-            for p in i.photos.all():
-                f.append(p)
-        print(fol)
+        f = Photo.all_photos()
+        # fol = user.following.all()
+        # f = [i for i in Photo.user_photos(user)]
+        # for i in fol:
+        #     for p in i.photos.all():
+        #         f.append(p)
+        # print(fol)
         context = {
             'user': user,
             'photos': f,

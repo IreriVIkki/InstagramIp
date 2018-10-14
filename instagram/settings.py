@@ -42,7 +42,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: keep the secret key used in production secret!
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 # Application definition
 
 INSTALLED_APPS = [
@@ -94,15 +94,15 @@ WSGI_APPLICATION = 'instagram.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
-# DATABASES = {
-#     #  judging from how these has been structured I assume that django can support more than one database since the entry for the databases we will use is a dictionary and the first guy has been named default meaning there can be other databases in the project
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'instagram',
-#         'USER': 'vikki',
-#         'PASSWORD': 'sasawa'
-#     }
-# }
+DATABASES = {
+    #  judging from how these has been structured I assume that django can support more than one database since the entry for the databases we will use is a dictionary and the first guy has been named default meaning there can be other databases in the project
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'instagram',
+        'USER': 'vikki',
+        'PASSWORD': 'sasawa'
+    }
+}
 
 
 # Password validation
@@ -150,36 +150,38 @@ STATICFILES_DIRS = [
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'image')
 
-
-# ***************************************************
-DISABLE_COLLECTSTATIC = config('DISABLE_COLLECTSTATIC')
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
-)
-
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
-django_heroku.settings(locals())
-
-# *****************************************************
-
-MODE = config("MODE", default="dev")
 SECRET_KEY = 'wj63t*ic1po*)ocf3hr_mj7$y9ej7l*29v#_=)l$_12i-n5c8l'
-DEBUG = config('DEBUG', default=True, cast=bool)
-# development
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'instagram',
-        'USER': 'vikki',
-        'PASSWORD': 'sasawa',
-        'HOST': '127.0.0.1',
-        'PORT': '',
-    }
 
-}
+# # ***************************************************
+# DISABLE_COLLECTSTATIC = config('DISABLE_COLLECTSTATIC')
+# STATICFILES_DIRS = (
+#     os.path.join(BASE_DIR, 'static'),
+# )
 
-db_from_env = dj_database_url.config(conn_max_age=500)
-DATABASES['default'].update(db_from_env)
-ALLOWED_HOSTS = ['instagram-ireri.herokuapp.com', 'localhost']
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+# django_heroku.settings(locals())
+
+# # *****************************************************
+
+# MODE = config("MODE", default="dev")
+# SECRET_KEY = 'wj63t*ic1po*)ocf3hr_mj7$y9ej7l*29v#_=)l$_12i-n5c8l'
+# DEBUG = config('DEBUG', default=True, cast=bool)
+# # development
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'instagram',
+#         'USER': 'vikki',
+#         'PASSWORD': 'sasawa',
+#         'HOST': '127.0.0.1',
+#         'PORT': '',
+#     }
+
+# }
+
+# db_from_env = dj_database_url.config(conn_max_age=500)
+# DATABASES['default'].update(db_from_env)
+# ALLOWED_HOSTS = ['instagram-ireri.herokuapp.com', 'localhost']

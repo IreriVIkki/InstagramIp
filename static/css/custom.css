@@ -21,6 +21,10 @@
     height: 77px;
 }
 
+.instagram-title {
+    font-family: 'Grand Hotel', cursive;
+}
+
 .far {
     font-size: 26px;
     font-weight: lighter;
@@ -178,3 +182,73 @@
     border: none;
     background: none;
 }
+
+/* *************************************************** */
+
+/* pop out styling for all over the templates */
+
+.popout-overlay {
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(1, 1, 1, 0.7);
+    z-index: 5;
+}
+
+.popout {
+    position: absolute;
+    top: 10%;
+    left: 10%;
+    width: 80%;
+    height: 80%;
+    z-index: 7;
+}
+
+.arrow-left {
+    width: 10vw;
+}
+
+.arrow-right {
+    width: 10vw;
+}
+
+.popout-img {
+    width: 40vw;
+}
+
+.popout-img img {
+    width: 100%;
+    height: auto;
+}
+
+.popout-comments {
+    width: 20vw;
+}
+
+.popout-header {
+    height: 55px;
+    border-color: darkgray;
+}
+
+.popout-user-dpic {
+    width: 53px;
+    height: 53px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.popout-user-dpic img {
+    width: 100%;
+}
+
+.popout-user-name {}
+
+.popout-body {
+    height: 60%;
+    border-bottom: solid darkgray 1px;
+    overflow: scroll;
+}
+
+/* *************************************************** */
